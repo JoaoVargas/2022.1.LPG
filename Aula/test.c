@@ -11,25 +11,23 @@ int main(void){
 	
 	scanf("%f", &x);
 	
-	notas[0] =  x / 100;
-	notas[1] = (x - (notas[0]*100)) / 50;
-	notas[2] = (x - ((notas[0]*100) + (notas[1]*50))) / 20;
-	notas[3] = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20))) / 10;
-	notas[4] = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10))) / 5;
-	notas[5] = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5))) / 2;
-	notas[6] = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2))) / 1;
+	notas[0]  =  x / 100;
+	notas[1]  = (x - (notas[0]*100)) / 50;
+	notas[2]  = (x - ((notas[0]*100) + (notas[1]*50))) / 20;
+	notas[3]  = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20))) / 10;
+	notas[4]  = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10))) / 5;
+	notas[5]  = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5))) / 2;
+	notas[6]  = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2))) / 1;
+	notas[7]  = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2) + (notas[6]*1))) / 0.50;
+	notas[8]  = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2) + (notas[6]*1) + (notas[7]*0.50))) / 0.25;
+	notas[9]  = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2) + (notas[6]*1) + (notas[7]*0.50) + (notas[8]*0.25))) / 0.10;
+	notas[10] = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2) + (notas[6]*1) + (notas[7]*0.50) + (notas[8]*0.25) + (notas[9]*0.10))) / 0.05;
+	notas[11] = (x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2) + (notas[6]*1) + (notas[7]*0.50) + (notas[8]*0.25) + (notas[9]*0.10) + (notas[10]*0.05))) / 0.01;
 	
-	//notas[7] = (((((((x%100)%50)%20)%10)%5)%2)%1) / ((((((((x%100)%50)%20)%10)%5)%2)%1)/2.0);
-	//notas[8] = (((((((x%100)%50)%20)%10)%5)%2)%1) / ((((((((x%100)%50)%20)%10)%5)%2)%1)/4.0);
-	//notas[9] = (((((((x%100)%50)%20)%10)%5)%2)%1) / ((((((((x%100)%50)%20)%10)%5)%2)%1)/5.0);
-	//notas[10]= (((((((x%100)%50)%20)%10)%5)%2)%1) / ((((((((x%100)%50)%20)%10)%5)%2)%1)/20.0);
-	//notas[11]= (((((((x%100)%50)%20)%10)%5)%2)%1) / ((((((((x%100)%50)%20)%10)%5)%2)%1)/100.0);
+	printf("NOTAS:\n");
 	
-	
-	
-	
-	for (i=0 ; i < 7 ; i++){
-		printf("%d notas de ",notas[i]);
+	for (i=0 ; i < 6 ; i++){
+		printf("%d nota(s) de ",notas[i]);
 		
 		for (j=0 ; j < strlen(notasNomes[i]) ; j++){
 			printf("%c",notasNomes[i][j]);
@@ -37,6 +35,20 @@ int main(void){
 		
 		printf("\n");
 	}
+	
+	printf("MOEDAS:\n");
+	
+	for (i=6 ; i < (num-1); i++){
+		printf("%d moeda(s) de ",notas[i]);
+		
+		for (j=0 ; j < strlen(notasNomes[i]) ; j++){
+			printf("%c",notasNomes[i][j]);
+		}
+		
+		printf("\n");
+	}
+	
+	printf("%.0f moeda(s) de R$ 0.01\n",(x - ((notas[0]*100) + (notas[1]*50) + (notas[2]*20) + (notas[3]*10) + (notas[4]*5) + (notas[5]*2) + (notas[6]*1) + (notas[7]*0.50) + (notas[8]*0.25) + (notas[9]*0.10) + (notas[10]*0.05))) / 0.01);
 	
 	return 0;
 }
