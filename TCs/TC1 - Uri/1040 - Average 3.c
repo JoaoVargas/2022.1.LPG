@@ -14,26 +14,26 @@ int main()
     printf("Media: %.1f\n", Media);
     
     if (Media >= 7.0){
-        printf("Aluno aprovado. \n");
+        printf("Aluno aprovado.\n");
     }
     else if (Media < 7.0 && Media >= 5){
         scanf(" %f", &NR);
-        printf("Aluno em exame. \n");
-        printf("Nota do exame:  %.1f \n", NR);
+        printf("Aluno em exame.\n");
+        printf("Nota do exame: %.1f\n", NR);
         
         Media = (Media + NR) / 2;
         
         if(Media >= 5){
-            printf("Aluno aprovado. \n");
+            printf("Aluno aprovado.\n");
         }
         else if (Media < 5){
-            printf("Aluno reprovado. \n");
+            printf("Aluno reprovado.\n");
         }
         
-        printf("Media final: %.1f \n", Media);
+        printf("Media final: %.1f\n", Media);
     }
     else if (Media < 5){
-        printf("Aluno reprovado. \n");
+        printf("Aluno reprovado.\n");
     }
     
     
