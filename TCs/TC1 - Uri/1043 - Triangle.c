@@ -8,7 +8,7 @@ int main()
     scanf(" %f", &N2);
     scanf(" %f", &N3);
     
-    if (N1 + N2 < N3 || N2 + N3 < N1 || N3 + N1 < N2){
+    if (N1 + N2 > N3 && N2 + N3 > N1 && N3 + N1 > N2){
         Formula = N1 + N2 + N3;
         printf("Perimetro = %.1f\n", Formula);
     } else {
