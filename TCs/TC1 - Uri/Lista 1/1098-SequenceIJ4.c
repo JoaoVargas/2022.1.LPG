@@ -5,17 +5,7 @@ int main() {
     float k, l;
     for (i = 0 ; i <= 20 ; i+= 2){
         k = i/10.0;
-        if (i == 0){  
-            for (j = 1 ; j <= 3 ; j++){
-            l = j + k;
-            printf("I=%.0f J=%.0f\n", k, l );
-            } 
-        } else if (i == 10){  
-            for (j = 1 ; j <= 3 ; j++){
-            l = j + k;
-            printf("I=%.0f J=%.0f\n", k, l );
-            } 
-        } else if (i == 20){  
+        if ((i%10) == 0){  
             for (j = 1 ; j <= 3 ; j++){
             l = j + k;
             printf("I=%.0f J=%.0f\n", k, l );
