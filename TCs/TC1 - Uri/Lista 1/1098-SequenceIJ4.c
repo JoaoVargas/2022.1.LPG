@@ -2,12 +2,30 @@
  
 int main() {
     int i, j;
-    float k;
+    float k, l;
     for (i = 0 ; i <= 20 ; i+= 2){
         k = i/10.0;
-        for (j = 1 ; j <= 3 ; j++){
-            printf("I=%.1f J=%d\n", k, j );
-        }   
+        if (i == 0){  
+            for (j = 1 ; j <= 3 ; j++){
+            l = j + k;
+            printf("I=%.0f J=%.0f\n", k, l );
+            } 
+        } else if (i == 10){  
+            for (j = 1 ; j <= 3 ; j++){
+            l = j + k;
+            printf("I=%.0f J=%.0f\n", k, l );
+            } 
+        } else if (i == 20){  
+            for (j = 1 ; j <= 3 ; j++){
+            l = j + k;
+            printf("I=%.0f J=%.0f\n", k, l );
+            } 
+        }else {  
+            for (j = 1 ; j <= 3 ; j++){
+            l = j + k;
+            printf("I=%.1f J=%.1f\n", k, l );
+            } 
+        } 
     }
  
     return 0;
