@@ -2,7 +2,7 @@
 #include <math.h>
 
 
-int main()
+int main() 
 {
     int x, y, i;
     
