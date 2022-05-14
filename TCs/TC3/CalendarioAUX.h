@@ -19,6 +19,34 @@ typedef struct {
     int ano;
 } Aniversario;
 
+typedef struct {
+    int janeiro;
+    int fevereiro;
+    int marco;
+    int abril;
+    int maio;
+    int junho;
+    int julho;
+    int agosto;
+    int setembro;
+    int outubro;
+    int novembro;
+    int dezembro;
+
+    int janeiroTam;
+    int fevereiroTam;
+    int marcoTam;
+    int abrilTam;
+    int maioTam;
+    int junhoTam;
+    int julhoTam;
+    int agostoTam;
+    int setembroTam;
+    int outubroTam;
+    int novembroTam;
+    int dezembroTam;
+} Calendario;
+
 struct Pessoa{
     char nome[50];
     char email[50];
