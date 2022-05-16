@@ -7,6 +7,7 @@ Calendario calendario;
 int main()
 {
     calendario = calendarioMaker(calendario);
+	
     int menu = 1;
 	
 	while (!menu == 0){

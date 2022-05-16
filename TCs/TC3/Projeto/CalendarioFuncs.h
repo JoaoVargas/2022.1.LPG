@@ -1,5 +1,6 @@
 #include "CalendarioAUX.h"
 
+//Função para mostrar quantos dias tem um mês
 void mostrarDiasDoMes(Calendario calendario){
     int i;
     int numDias = sizeof(calendario.diasDoMes)/sizeof(calendario.diasDoMes[0]);
@@ -9,7 +10,7 @@ void mostrarDiasDoMes(Calendario calendario){
 }
 
 
-//função para dar valor aos itens de calendario
+//Função para dar valor aos itens de calendario
 Calendario calendarioMaker(Calendario calendarioBase){
     calendarioBase.diasDoMes[0] = 31;
     calendarioBase.diasDoMes[1] = 28;
