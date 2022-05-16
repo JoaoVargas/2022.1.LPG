@@ -1,49 +1,16 @@
-#include <string.h>
-#include <stdlib.h>
+#include "CalendarioAUX.h"
 
-//Define o tipo endereço
-typedef struct {
-    char pais[50];
-    char estado[50];
-    char bairro[50];
-    char rua[50];
-    char numero[50];
-    char complemento[50];
-    int cep[8];
-} Endereco;
+void mostrarDiasDoMes(Calendario calendario){
+    int i;
+    int numDias = sizeof(calendario.diasDoMes)/sizeof(calendario.diasDoMes[0]);
+    for (i = 0; i < numDias; i++){
+        printf("%d dias no mes de %s\n", calendario.diasDoMes[i], calendario.nomesDoMes[i]);
+    }
+}
 
-//define o tipo telefone
-typedef struct {
-    int ddd[2];
-    int cep[8];
-} Telefone;
-
-//define o tipo aniversario
-typedef struct {
-    int dia;
-    int mes;
-    int ano;
-} Aniversario;
-
-//define pessoa, que recebe endereço, telefone e aniversario
-struct Pessoa{
-    char nome[50];
-    char email[50];
-    Endereco endereco;
-    Telefone telefone;
-    Aniversario aniversario;
-    
-};
-
-//define calendario como um tipo
-typedef struct {
-    int diasDoMes[12];
-    char nomesDoMes[12][10];
-} Calendario;
 
 //função para dar valor aos itens de calendario
-Calendario calendarioMaker(void){
-    Calendario calendarioBase;
+Calendario calendarioMaker(Calendario calendarioBase){
     calendarioBase.diasDoMes[0] = 31;
     calendarioBase.diasDoMes[1] = 28;
     calendarioBase.diasDoMes[2] = 31;

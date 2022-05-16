@@ -1,23 +1,12 @@
-#include <stdio.h>  
-#include <stdlib.h>
-#include <string.h>
-#include "CalendarioAUX.c"
+#include "CalendarioFuncs.h"
 
-struct Pessoa teste;
+Pessoa teste;
 Endereco teste2[5];
 Calendario calendario;
 
-void mostrarDiasDoMes(void){
-    int i;
-    int numDias = sizeof(calendario.diasDoMes)/sizeof(calendario.diasDoMes[0]);
-    for (i = 0; i < numDias; i++){
-        printf("%d dias no mes de %s\n", calendario.diasDoMes[i], calendario.nomesDoMes[i]);
-    }
-}
-
 int main()
 {
-    calendario = calendarioMaker();
+    calendario = calendarioMaker(calendario);
     int menu = 1;
 	
 	while (!menu == 0){
@@ -28,7 +17,7 @@ int main()
 		switch(menu){
 		
 			case 1:
-				mostrarDiasDoMes();
+				mostrarDiasDoMes(calendario);
 				break;
 				
 		}
