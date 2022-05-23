@@ -1,4 +1,40 @@
-#include "CalendarioAUX.h"
+#include <stdio.h>  
+#include <stdlib.h>
+#include <string.h>
+
+//Define o tipo endereço
+typedef struct {
+    char pais[50];
+    char estado[50];
+    char bairro[50];
+    char rua[50];
+    char numero[50];
+    char complemento[50];
+    char cep[9];
+} Endereco;
+
+//define o tipo telefone
+typedef struct {
+    char ddd[3];
+    char num[9];
+} Telefone;
+
+//define o tipo aniversario
+typedef struct {
+    char dia[3];
+    char mes[3];
+    char ano[5];
+} Aniversario;
+
+//define pessoa, que recebe endereço, telefone e aniversario
+typedef struct {
+    char nome[50];
+    char email[50];
+    Endereco endereco;
+    Telefone telefone;
+    Aniversario aniversario;
+    
+} Pessoa;
 
 Endereco inserirEndereco(){
     Endereco tempEnd;
@@ -150,4 +186,65 @@ Pessoa* ordenarAlfabeticamente(Pessoa pessoa[], int max){
     }
 
     return pessoa;
+}
+
+int main()
+{
+	int i = 0;
+	Pessoa *lista;
+	lista = malloc(sizeof(Pessoa) * (i+1));
+	
+    int menu = 1;
+	while (!menu == 0){
+		printf("---Menu do Calendario---\n");
+		printf("Pessoas cadastradas: %d\n", i);
+		printf("Digite a opçao:\n");
+		printf("0 - Sair\n");
+		printf("1 - Inserir pessoa\n");
+		printf("2 - Deletar pessoa\n");
+		printf("3 - Mostrar pessoas cadastradas\n");
+		printf("4 - Buscar pessoas pelo nome\n");
+		printf("5 - Mostrar aniversariantes do mes\n");
+		printf("6 - Mostrar aniversariantes do dia\n");
+		scanf("%d", &menu );
+		printf("\n");
+
+		switch(menu){
+		
+			case 1:
+				lista[i] = inserirPessoa(lista[i]);
+				i++;
+				lista = realloc(lista, (i+1) * sizeof(Pessoa));
+			break;	
+
+			case 2:
+				lista = deletarPessoa(lista, i);
+				i--;
+				lista = realloc(lista, (i+1) * sizeof(Pessoa));
+			break;		
+
+			case 3:
+				mostrarPessoas(lista, i);
+			break;
+
+			case 4:
+				buscarPessoasNomes(lista, i);
+			break;
+
+			case 5:
+				aniversariantesDoMes(lista, i);
+			break;
+
+			case 6:
+				aniversariantesDoDia(lista, i);
+			break;
+				
+		}
+		printf("\n\n");
+		
+		lista = ordenarAlfabeticamente(lista, i);
+	}
+	printf("Adeus...\n");
+
+    return 0;
 }
