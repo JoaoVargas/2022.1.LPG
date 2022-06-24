@@ -225,10 +225,10 @@ void empilheAsobreB(void){
     {
         array[cordsB[0]][0] += array[cordsA[0]][0] - cordsA[1] + 1;
         array[cordsB[0]] = realloc(array[cordsB[0]], (array[cordsB[0]][0] + 1) * sizeof(int));
-
-        for (i = array[cordsB[0]][0]; i >= cordsB[1]; i--)
+        printf("%d %d\n%d %d\n", cordsA[0], cordsA[1], cordsB[0], cordsB[1]);
+        for (i = array[cordsB[0]][0]; i > (cordsB[1] + array[cordsA[0]][0] - cordsA[1] + 1); i--)
         {
-            array[cordsB[0]][i] = array[cordsB[0]][i-1];
+            array[cordsB[0]][i] = array[cordsB[0]][cordsB[1]+1];
         }
 
         for (i = 0; i < array[cordsA[0]][0] - cordsA[1] + 1; i++)
@@ -236,13 +236,8 @@ void empilheAsobreB(void){
             array[cordsB[0]][i + 1 + cordsB[1]] = array[cordsA[0]][cordsA[1]+i];
         }
 
-        // for (i = cordsA[1]; i < array[cordsA[0]][0]; i++)
-        // {
-        //     array[cordsA[0]][i] = array[cordsA[0]][i + 1];
-        // }
-
-        // array[cordsA[0]] = realloc(array[cordsA[0]], array[cordsA[0]][0] * sizeof(int));
-        // array[cordsA[0]][0]--;
+        array[cordsA[0]] = realloc(array[cordsA[0]], cordsA[1] * sizeof(int));
+        array[cordsA[0]][0] = cordsA[1] - 1;
     }
     else if ((!acharCords(a, cordsA)) && (!acharCords(b, cordsB)))
     {
