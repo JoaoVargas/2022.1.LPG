@@ -20,9 +20,8 @@ int main()
     printf("Digite o tamanho do vetor: ");
     scanf("%d", &n);
 
-    
-    array = malloc(sizeof(int *) * n); //Aloca dinamicamente o tamanho do array de ponteiros
-    for (i = 0; i < n; i++) // Aloca memoria para cada ponteiro 
+    array = malloc(sizeof(int *) * n); // Aloca dinamicamente o tamanho do array de ponteiros
+    for (i = 0; i < n; i++)            // Aloca memoria para cada ponteiro
     {
         array[i] = malloc(sizeof(int) * (2));
         array[i][0] = 1;
@@ -86,7 +85,7 @@ int acharCords(int num, int cords[])
     {
         for (j = 1; j < array[i][0] + 1; j++)
         {
-            if (num == array[i][j] )
+            if (num == array[i][j])
             {
                 cords[0] = i;
                 cords[1] = j;
@@ -97,7 +96,6 @@ int acharCords(int num, int cords[])
     return 0;
 }
 
-
 void mostrarArray()
 {
     int i, j;
@@ -107,7 +105,7 @@ void mostrarArray()
         printf("%d - ", i);
         for (j = 0; j < array[i][0]; j++)
         {
-            printf("[%d]", array[i][j+1]);
+            printf("[%d]", array[i][j + 1]);
         }
         printf("\n");
     }
@@ -126,13 +124,14 @@ void movaTodosAparaB()
     oldSizeA = array[a][0];
     oldSizeB = array[b][0];
 
-    if (array[a][0]){
+    if (array[a][0])
+    {
         array[b] = realloc(array[b], ((oldSizeA + oldSizeB) * sizeof(int)));
         array[b][0] += oldSizeA;
 
         for (i = 0; i < oldSizeA; i++)
         {
-            array[b][oldSizeB+i+1] = array[a][i+1];
+            array[b][oldSizeB + i + 1] = array[a][i + 1];
         }
         array[a] = realloc(array[a], 1);
         array[a][0] = 0;
@@ -171,7 +170,8 @@ void movaAparaB()
     }
 }
 
-void movaAsobreB(void){
+void movaAsobreB(void)
+{
     int a, b, cordsA[2], cordsB[2], i;
 
     printf("Digite o bloco A: ");
@@ -202,7 +202,7 @@ void movaAsobreB(void){
     else if ((!acharCords(a, cordsA)) && (!acharCords(b, cordsB)))
     {
         printf("Impossível, nao existe a caixa A nem a B\n");
-    } 
+    }
     else if (!acharCords(a, cordsA))
     {
         printf("Impossível, nao existe a caixa A\n");
@@ -213,7 +213,8 @@ void movaAsobreB(void){
     }
 }
 
-void empilheAsobreB(void){
+void empilheAsobreB(void)
+{
     int a, b, cordsA[2], cordsB[2], i;
 
     printf("Digite o bloco A: ");
@@ -228,12 +229,12 @@ void empilheAsobreB(void){
         printf("%d %d\n%d %d\n", cordsA[0], cordsA[1], cordsB[0], cordsB[1]);
         for (i = array[cordsB[0]][0]; i > (cordsB[1] + array[cordsA[0]][0] - cordsA[1] + 1); i--)
         {
-            array[cordsB[0]][i] = array[cordsB[0]][cordsB[1]+1];
+            array[cordsB[0]][i] = array[cordsB[0]][cordsB[1] + 1];
         }
 
         for (i = 0; i < array[cordsA[0]][0] - cordsA[1] + 1; i++)
         {
-            array[cordsB[0]][i + 1 + cordsB[1]] = array[cordsA[0]][cordsA[1]+i];
+            array[cordsB[0]][i + 1 + cordsB[1]] = array[cordsA[0]][cordsA[1] + i];
         }
 
         array[cordsA[0]] = realloc(array[cordsA[0]], cordsA[1] * sizeof(int));
