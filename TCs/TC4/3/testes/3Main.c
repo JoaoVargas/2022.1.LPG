@@ -3,7 +3,9 @@
 
 int main()
 {
-    int i;
+    int i, num;
+    int* linha;
+    linha = malloc(sizeof(char) * 1);
 
     FILE *arqE = fopen("Entrada.txt", "rt"); //abre entrada
     if (arqE == NULL)
@@ -12,11 +14,20 @@ int main()
         return 0;
     }
 
-    // lendo uma string do teclado com a função fgets()
-    char palavras[100], palavras2[100];
-    fgets(palavras, 100, arqE);
-    fgets(palavras2, 100, arqE);
+    while (!feof(arqE)) // loop principal
+    {
+        fscanf(arqE, "%d", &num);
+        linha = realloc(linha, num * sizeof(char));
+        printf("%d\n", num);
 
-    printf("%s", palavras);
-    printf("%s", palavras2);
+        for (i = 0; i < num; i++)
+        {
+            fscanf(arqE, "%d", &linha[i]);
+            printf("%d ", linha[i]);
+        }
+        printf("\n");
+        
+    }
+    
+    fclose(arqE);
 }
