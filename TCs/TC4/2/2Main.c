@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+void escreverRand(FILE *arq);
+
 int main()
 {
     int i, num, positivo = 0, negativo = 0, temp;
