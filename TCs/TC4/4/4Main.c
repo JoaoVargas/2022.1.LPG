@@ -1,8 +1,3 @@
-// nao entendi o pq de precisar armazenar numa string os valores em vez de ler diretamente
-// do arquivo, sendo q ao ler diretamente ele poupa memoria e é mais eficaz.
-// Mas aqui segue conforme pedido
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -13,16 +8,16 @@ int main()
     linha = malloc(sizeof(int) * 1);
     int i, num, positivo = 0, negativo = 0;
 
-    FILE *arqEE = fopen("Entrada.txt", "wt"); //Abre para gerar valores
+    FILE *arqEE = fopen("Entrada.bin", "wb"); //Abre para gerar valores
     if (arqEE == NULL)
     {
         printf("Erro abrindo arquivo de entrada!\n");
         return 0;
     }
-    //escreverRand(arqEE);// chama a funçao q gera valores
+    escreverRand(arqEE);// chama a funçao q gera valores
     fclose(arqEE);// fecha apos gerar os valores
 
-    FILE *arqE = fopen("Entrada.txt", "rt"); //abre para leitura
+    FILE *arqE = fopen("Entrada.bin", "rb"); //abre para leitura
     if (arqE == NULL)
     {
         printf("Erro abrindo arquivo de entrada!\n");
@@ -38,7 +33,7 @@ int main()
 
     while (!feof(arqE)) // loop principal
     {
-        fscanf(arqE, "%d", &num);
+        fread(&num, sizeof(int), 1, arqE);
         
         if (num == 0) // verificaçao fim do arquivo
         {
@@ -48,7 +43,7 @@ int main()
             linha = realloc(linha, num * sizeof(int));
             for (i = 0; i < num; i++)// loop q vai lendo e adicionando nas variaveis
             {
-                fscanf(arqE, "%d", &linha[i]);
+                fread(&linha[i], sizeof(int), 1, arqE);
                 if (linha[i] < 0)
                 {
                     negativo++;
@@ -78,7 +73,7 @@ int main()
             fprintf(arqS, "quantidade inválida de casos\n");
             for (i = 0; i < num; i++)
             {
-                fscanf(arqE, "%d", &linha[i]);
+                fread(&linha[i], sizeof(int), 1, arqE);
             }
         }
 
@@ -106,14 +101,13 @@ void escreverRand(FILE *arq){// funçao q gera um arquivo randomicamente
     for (i = 0; i < n; i++)
     {
         temp = rand() % 100000;
+        fwrite(&temp, sizeof(int), 1, arq);
 
-        fprintf(arq, "%d", temp);
         for (j = 0; j < temp; j++)
         {
             temp2 = rand() - metade; // gera um numero entre -1073741823 e 1073741823
-            fprintf(arq, " %d", temp2);
+            fwrite(&temp2, sizeof(int), 1, arq);
         }
-        fprintf(arq, "\n");
     }
-    fprintf(arq, "0");
+    fwrite(0, sizeof(int), 1, arq);
 }

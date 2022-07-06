@@ -10,20 +10,20 @@ typedef struct {
     char rua[50];
     char numero[50];
     char complemento[50];
-    int cep[8];
+    char cep[9];
 } Endereco;
 
 //define o tipo telefone
 typedef struct {
-    int ddd[2];
-    int cep[8];
+    char ddd[3];
+    char num[9];
 } Telefone;
 
 //define o tipo aniversario
 typedef struct {
-    int dia;
-    int mes;
-    int ano;
+    char dia[3];
+    char mes[3];
+    char ano[5];
 } Aniversario;
 
 //define pessoa, que recebe endereço, telefone e aniversario
@@ -35,9 +35,3 @@ typedef struct {
     Aniversario aniversario;
     
 } Pessoa;
-
-//define calendario como um tipo
-typedef struct {
-    int diasDoMes[12];
-    char nomesDoMes[12][10];
-} Calendario;
