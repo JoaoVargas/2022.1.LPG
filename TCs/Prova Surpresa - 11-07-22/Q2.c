@@ -31,7 +31,7 @@ int main()
         return 0;
     }
 
-    for (;!feof(in);)
+    while (!feof(in))
     // loop principal
     {
         printf("%d\n", !feof(in));
@@ -44,7 +44,6 @@ int main()
             fprintf(out, "%s\n", temp.nome);
         }
 
-        x = 0;
     }
 
     fclose(in); // fecha leitura e escrita
