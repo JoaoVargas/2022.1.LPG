@@ -29,6 +29,6 @@ typedef struct
 
 typedef struct
 {
-    Evento* evento;
+    Evento *lista;
     int numEventos;
 } ListaEventos;
