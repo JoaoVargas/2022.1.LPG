@@ -92,11 +92,9 @@ int main()
     for (i = 0; i < LP->numEventos; i++)
     {
         fwrite(&LP->lista[i], sizeof(Evento), 1, escrita);
-        printf("%d", &LP->lista[i]);
     }
     
 
-    
     fclose(leitura);
     fclose(escrita);
     free(LP->lista);
