@@ -1,6 +1,7 @@
 #include "AgendaAux.h"
 
 int addEvento(ListaEventos *);
+int faddEvento(ListaEventos *, Evento);
 int delEvento(ListaEventos *);
 void mostrarTodosEventos(ListaEventos *);
 Evento cadastrarEvento(Evento);
@@ -10,6 +11,7 @@ int compararEventos(const void *x, const void *y);
 void prepDelEvento(ListaEventos *);
 void passarParaTras(ListaEventos *, int);
 void mostrarDataEventos(ListaEventos *);
+void mostrarCincEventos(ListaEventos *, int, int, int);
 
 int compararEventos(const void *x, const void *y)
 {
@@ -308,6 +310,7 @@ int addEvento(ListaEventos *LP)
     if (!LP->numEventos)
     {
         LP->lista[LP->numEventos] = cadastrarEvento(LP->lista[LP->numEventos]);
+        return 1;
     }
     else
     {
@@ -326,6 +329,41 @@ int addEvento(ListaEventos *LP)
             }
         }
     }
+    return 0;
+}
+
+int faddEvento(ListaEventos *LP, Evento file)
+{
+    int i;
+
+    if (!LP->numEventos)
+    {
+        LP->lista[LP->numEventos] = file;
+        LP->numEventos++;
+        qsort(LP->lista, LP->numEventos, sizeof(Evento), compararEventos);
+        LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+        return 1;
+    }
+    else
+    {
+        for (i = 0; i < LP->numEventos + 1; i++)
+        {
+            if (LP->lista[i].data.ano == file.data.ano && LP->lista[i].data.mes == file.data.mes && LP->lista[i].data.dia == file.data.dia && LP->lista[i].fim.hora >= file.inicio.hora && (LP->lista[i].fim.min >= file.inicio.min || LP->lista[i].inicio.min <= file.fim.min))
+            {
+                printf("Erro, ja existe um evento nesse periodo. Entrada File");
+                return 0;
+            }
+            else
+            {
+                LP->lista[LP->numEventos] = file;
+                LP->numEventos++;
+                qsort(LP->lista, LP->numEventos, sizeof(Evento), compararEventos);
+                LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
 
 void prepDelEvento(ListaEventos *LP)
@@ -548,7 +586,7 @@ void mostrarDataEventos(ListaEventos *LP)
 {
     Evento buffer;
     char buffer2[3], buffer4[5];
-    int dia, mes, ano, check = 0, check2 = 0, i, save = 0;
+    int dia, mes, ano, check = 0, i, save = 0;
 
     while (check == 0)
     {
@@ -647,5 +685,71 @@ void mostrarDataEventos(ListaEventos *LP)
     {
         printf("Nenhum Evento cadastrado nessa data\n");
     }
-    
+}
+
+void mostrarCincEventos(ListaEventos *LP, int dia, int mes, int ano)
+{
+    int i, save = 0;
+    Evento buffer;
+
+    buffer.data.dia = dia;
+    buffer.data.mes = mes;
+    buffer.data.ano = ano;
+
+    for (i = 0; i < LP->numEventos; i++)
+    {
+
+        if (LP->lista[i].data.ano > buffer.data.ano)
+        {
+            printf("%02d/%02d/%04d\n", LP->lista[i].data.dia, LP->lista[i].data.mes, LP->lista[i].data.ano);
+            printf("%02d:%02d - %02d:%02d\n", LP->lista[i].inicio.hora, LP->lista[i].inicio.min, LP->lista[i].fim.hora, LP->lista[i].fim.min);
+            printf("Local do Evento: %s\n", LP->lista[i].local);
+            printf("Descricao do Evento: %s\n", LP->lista[i].descricao);
+            if (!(i + 1 == LP->numEventos))
+            {
+                printf("---\n");
+            }
+            save++;
+        }
+        else if (LP->lista[i].data.ano == buffer.data.ano)
+        {
+            if (LP->lista[i].data.mes > buffer.data.mes)
+            {
+                printf("%02d/%02d/%04d\n", LP->lista[i].data.dia, LP->lista[i].data.mes, LP->lista[i].data.ano);
+                printf("%02d:%02d - %02d:%02d\n", LP->lista[i].inicio.hora, LP->lista[i].inicio.min, LP->lista[i].fim.hora, LP->lista[i].fim.min);
+                printf("Local do Evento: %s\n", LP->lista[i].local);
+                printf("Descricao do Evento: %s\n", LP->lista[i].descricao);
+                if (!(i + 1 == LP->numEventos))
+                {
+                    printf("---\n");
+                }
+                save++;
+            }
+            else if (LP->lista[i].data.mes == buffer.data.mes)
+            {
+                if (LP->lista[i].data.dia >= buffer.data.dia)
+                {
+                    printf("%02d/%02d/%04d\n", LP->lista[i].data.dia, LP->lista[i].data.mes, LP->lista[i].data.ano);
+                    printf("%02d:%02d - %02d:%02d\n", LP->lista[i].inicio.hora, LP->lista[i].inicio.min, LP->lista[i].fim.hora, LP->lista[i].fim.min);
+                    printf("Local do Evento: %s\n", LP->lista[i].local);
+                    printf("Descricao do Evento: %s\n", LP->lista[i].descricao);
+                    if (!((i + 1 == LP->numEventos) || save == 5))
+                    {
+                        printf("---\n");
+                    }
+                    save++;
+                }
+            }
+        }
+
+        if (save == 5)
+        {
+            i = LP->numEventos;
+        }
+    }
+
+    if (save == 0)
+    {
+        printf("Nenhum Evento cadastrado a partir da data atual.\n");
+    }
 }

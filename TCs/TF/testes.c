@@ -93,6 +93,20 @@ int main()
 {
     int i;
 
+    FILE *escrita = fopen("Entrada.bin", "wb"); 
+    // if (escrita == NULL)
+    // {
+    //     printf("Erro abrindo arquivo de entrada!\n");
+    //     return 0;
+    // }
+
+    // FILE *leitura = fopen("Entrada.bin", "rb");
+    // if (leitura == NULL)
+    // {
+    //     printf("Erro abrindo arquivo de entrada!\n");
+    //     return 0;
+    // }
+
     ListaEventos *LP;
     LP->numEventos = 0;
     LP->lista = malloc(sizeof(Evento) * (LP->numEventos + 1));
