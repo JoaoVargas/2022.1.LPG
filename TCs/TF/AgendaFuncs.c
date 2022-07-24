@@ -376,9 +376,10 @@ void prepDelEvento(ListaEventos *LP)
     {
         for (i = 0; i < LP->numEventos; i++)
         {
-            printf("[%02d]%02d/%02d/%04d: ", i, LP->lista[i].data.dia, LP->lista[i].data.mes, LP->lista[i].data.ano);
-            printf("[%02d:%02d - %02d:%02d]\n", LP->lista[i].inicio.hora, LP->lista[i].inicio.min, LP->lista[i].fim.hora, LP->lista[i].fim.min);
+            printf("[%02d] %02d/%02d/%04d - ", i, LP->lista[i].data.dia, LP->lista[i].data.mes, LP->lista[i].data.ano);
+            printf("{%02d:%02d - %02d:%02d}\n", LP->lista[i].inicio.hora, LP->lista[i].inicio.min, LP->lista[i].fim.hora, LP->lista[i].fim.min);
         }
+        printf("\n");
 
         while (check == 0)
         {
@@ -521,7 +522,7 @@ void prepDelEvento(ListaEventos *LP)
 
         if (save == -1)
         {
-            printf("Evento inserido invalido. Nenhum correspondente cadastrado.\n");
+            printf("Evento invalido inserido. Nenhum correspondente cadastrado.\n");
         }
         else
         {
@@ -666,6 +667,7 @@ void mostrarDataEventos(ListaEventos *LP)
     }
     check = 0;
 
+    printf("\n");
     for (i = 0; i < LP->numEventos; i++)
     {
         if (LP->lista[i].data.dia == buffer.data.dia && LP->lista[i].data.mes == buffer.data.mes && LP->lista[i].data.ano == buffer.data.ano)
