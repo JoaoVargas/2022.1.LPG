@@ -1,4 +1,4 @@
-#include "AgendaFuncs.c"
+#include "AgendaFuncs.h"
 
 int main()
 {
