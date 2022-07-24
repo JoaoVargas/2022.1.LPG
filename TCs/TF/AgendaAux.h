@@ -5,16 +5,16 @@
 // Define o tipo Data
 typedef struct
 {
-    char dia[2];
-    char mes[2];
-    char ano[4];
+    int dia;
+    int mes;
+    int ano;
 } Data;
 
 // define o tipo Hora
 typedef struct
 {
-    char hora[2];
-    char min[2];
+    int hora;
+    int min;
 } Hora;
 
 // define Evento, que recebe os tipos Data e Hora
@@ -27,6 +27,7 @@ typedef struct
     char descricao[200];
 } Evento;
 
+//define LIstaEventos, recebe um vetor de Evento
 typedef struct
 {
     Evento *lista;

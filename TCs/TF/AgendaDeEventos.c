@@ -7,6 +7,7 @@ int main()
     LP->lista = malloc(sizeof(Evento) * (LP->numEventos + 1));
 
     int menu = 1;
+    
     while (!menu == 0)
     {
         printf("\n\n");
@@ -30,7 +31,9 @@ int main()
                 addEvento(LP);
                 LP->numEventos++;
                 LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
-                printf("%s\n", LP->lista[0].data.dia);
+                printf("%d\n", LP->lista[0].data.dia);
+                printf("%d\n", LP->lista[0].data.mes);
+                printf("%d\n", LP->lista[0].data.ano);
                 break;
 
             case 2:
