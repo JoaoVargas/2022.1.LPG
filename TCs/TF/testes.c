@@ -29,8 +29,119 @@ typedef struct
     int numEventos;
 } ListaEventos;
 
+int compararEventos (const void *x, const void *y) {
+    int priA = ((Evento *)x)->data.ano, segA = ((Evento *)y)->data.ano;
+    int priM = ((Evento *)x)->data.mes, segM = ((Evento *)y)->data.mes;
+    int priD = ((Evento *)x)->data.dia, segD = ((Evento *)y)->data.dia;
+    int priH = ((Evento *)x)->inicio.hora, segH = ((Evento *)y)->inicio.hora;
+    int priM = ((Evento *)x)->inicio.min, segM = ((Evento *)y)->inicio.min;
+
+    int diff = priA - segA;
+
+    if (diff == 0) {
+        if (priM < segM)
+        {
+            diff = -1;
+        }
+        else if (priM > segM)
+        {    
+            diff = +1;
+        }
+        else
+        {
+            if (priD < priD)
+            {
+                diff = -1;
+            }
+            else if (priD > priD)
+            {    
+                diff = +1;
+            }
+            else
+            {
+                if (priH < priH)
+                {
+                    diff = -1;
+                }
+                else if (priH > priH)
+                {    
+                    diff = +1;
+                }
+                else
+                {
+                    if (priM < priM)
+                    {
+                        diff = -1;
+                    }
+                    else if (priM > priM)
+                    {    
+                        diff = +1;
+                    }
+                    else
+                    {
+                        diff = 0;
+                    }
+                }
+            }
+        }
+    }
+    
+    return diff;
+}
+
 int main()
 {
+    int i;
+
+    ListaEventos *LP;
+    LP->numEventos = 0;
+    LP->lista = malloc(sizeof(Evento) * (LP->numEventos + 1));
+
+    LP->lista[LP->numEventos].data.dia = 2;
+    LP->numEventos++;
+    LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+
+    LP->lista[0].data.ano = 10;
+    LP->lista[0].data.mes = 2;
+    LP->lista[0].data.dia = 4;
+
+    LP->numEventos++;
+    LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+
+    LP->lista[1].data.ano = 15;
+    LP->lista[1].data.mes = 2;
+    LP->lista[1].data.dia = 3;
+
+    LP->numEventos++;
+    LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+
+    LP->lista[2].data.ano = 10;
+    LP->lista[2].data.mes = 2;
+    LP->lista[2].data.dia = 2;
+
+    LP->numEventos++;
+    LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+
+    LP->lista[3].data.ano = 15;
+    LP->lista[3].data.mes = 1;
+    LP->lista[3].data.dia = 1;
+
+    printf("%d / %d / %d\n",LP->lista[0].data.dia, LP->lista[0].data.mes, LP->lista[0].data.ano);
+    printf("%d / %d / %d\n",LP->lista[1].data.dia, LP->lista[1].data.mes, LP->lista[1].data.ano);
+    printf("%d / %d / %d\n",LP->lista[2].data.dia, LP->lista[2].data.mes, LP->lista[2].data.ano);
+    printf("%d / %d / %d\n",LP->lista[3].data.dia, LP->lista[3].data.mes, LP->lista[3].data.ano);
+
+    printf("\n");
+
+    qsort(LP->lista, LP->numEventos, sizeof(Evento), compararEventos);
+
+    printf("%d / %d / %d\n",LP->lista[0].data.dia, LP->lista[0].data.mes, LP->lista[0].data.ano);
+    printf("%d / %d / %d\n",LP->lista[1].data.dia, LP->lista[1].data.mes, LP->lista[1].data.ano);
+    printf("%d / %d / %d\n",LP->lista[2].data.dia, LP->lista[2].data.mes, LP->lista[2].data.ano);
+    printf("%d / %d / %d\n",LP->lista[3].data.dia, LP->lista[3].data.mes, LP->lista[3].data.ano);
+    
+
+    
     // char line[3], line2[3];
     // int i, j;
     // if(fgets(line, sizeof(line), stdin)){
@@ -56,15 +167,6 @@ int main()
     // }
 
 
-    ListaEventos *LP;
-    LP->numEventos = 0;
-    LP->lista = malloc(sizeof(Evento) * (LP->numEventos + 1));
-
-    LP->lista[LP->numEventos].data.dia = 2;
-    LP->numEventos++;
-    LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
-
-    printf("%d\n", LP->lista[0].data.dia);
 
 
     return 0;

@@ -4,6 +4,67 @@ void addEvento(ListaEventos *);
 Evento cadastrarEvento(Evento);
 Evento cadastrarData(Evento);
 Evento cadastrarHora(Evento);
+int compararEventos (const void *x, const void *y);
+
+int compararEventos (const void *x, const void *y) {
+    int priA = ((Evento *)x)->data.ano, segA = ((Evento *)y)->data.ano;
+    int priM = ((Evento *)x)->data.mes, segM = ((Evento *)y)->data.mes;
+    int priD = ((Evento *)x)->data.dia, segD = ((Evento *)y)->data.dia;
+    int priH = ((Evento *)x)->inicio.hora, segH = ((Evento *)y)->inicio.hora;
+    int priMi = ((Evento *)x)->inicio.min, segMi = ((Evento *)y)->inicio.min;
+
+    int diff = priA - segA;
+
+    if (diff == 0) {
+        if (priM < segM)
+        {
+            diff = -1;
+        }
+        else if (priM > segM)
+        {    
+            diff = +1;
+        }
+        else
+        {
+            if (priD < segD)
+            {
+                diff = -1;
+            }
+            else if (priD > segD)
+            {    
+                diff = +1;
+            }
+            else
+            {
+                if (priH < segH)
+                {
+                    diff = -1;
+                }
+                else if (priH > segH)
+                {    
+                    diff = +1;
+                }
+                else
+                {
+                    if (priMi < segMi)
+                    {
+                        diff = -1;
+                    }
+                    else if (priMi > segMi)
+                    {    
+                        diff = +1;
+                    }
+                    else
+                    {
+                        diff = 0;
+                    }
+                }
+            }
+        }
+    }
+    
+    return diff;
+}
 
 Evento cadastrarData(Evento eventoData)
 {
@@ -224,5 +285,7 @@ void addEvento(ListaEventos *LP)
     }
     else
     {
+        LP->lista[LP->numEventos] = cadastrarEvento(LP->lista[LP->numEventos]);
+        qsort(LP->lista, LP->numEventos, sizeof(Evento), compararEventos);
     }
 }
