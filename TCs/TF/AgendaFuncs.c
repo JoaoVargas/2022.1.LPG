@@ -1,6 +1,8 @@
 #include "AgendaAux.h"
 
-void addEvento(ListaEventos *);
+int addEvento(ListaEventos *);
+int delEvento(ListaEventos *);
+void mostrarTodosEventos(ListaEventos *);
 Evento cadastrarEvento(Evento);
 Evento cadastrarData(Evento);
 Evento cadastrarHora(Evento);
@@ -218,10 +220,14 @@ Evento cadastrarHora(Evento eventoHora)
         {
             if (1 == sscanf(buffer2, "%d", &horaFim))
             {
-                if (horaFim <= 23 && horaFim >= 0)
+                if (horaFim <= 23 && horaFim >= horaIni)
                 {
                     eventoHora.fim.hora = horaFim;
                     check = 1;
+                }
+                else if (horaFim < horaIni)
+                {
+                    printf("Erro lendo a hora, digite uma hora final maior que a hora inicial.\n");
                 }
                 else
                 {
@@ -246,8 +252,20 @@ Evento cadastrarHora(Evento eventoHora)
             {
                 if (minutoFim <= 59 && minutoFim >= 0)
                 {
-                    eventoHora.fim.min = minutoFim;
-                    check = 1;
+                    if (!(horaIni == horaFim))
+                    {
+                        eventoHora.fim.min = minutoFim;
+                        check = 1;
+                    }
+                    else if (horaIni == horaFim && minutoFim >= minutoIni)
+                    {
+                        eventoHora.fim.min = minutoFim;
+                        check = 1;
+                    }
+                    else
+                    {
+                        printf("Erro lendo o minuto, digite um minuto final maior que o minuto inicial.\n");
+                    }
                 }
                 else
                 {
@@ -277,15 +295,71 @@ Evento cadastrarEvento(Evento evento)
     return evento;
 }
 
-void addEvento(ListaEventos *LP)
+int addEvento(ListaEventos *LP)
 {
+    Evento buffer;
+    int i;
+
     if (!LP->numEventos)
     {
         LP->lista[LP->numEventos] = cadastrarEvento(LP->lista[LP->numEventos]);
     }
     else
     {
-        LP->lista[LP->numEventos] = cadastrarEvento(LP->lista[LP->numEventos]);
-        qsort(LP->lista, LP->numEventos, sizeof(Evento), compararEventos);
+        buffer = cadastrarEvento(buffer);
+        for (i = 0; i < LP->numEventos + 1; i++)
+        {
+            if (LP->lista[i].data.ano == buffer.data.ano && LP->lista[i].data.mes == buffer.data.mes && LP->lista[i].data.dia == buffer.data.dia
+            &&  LP->lista[i].fim.hora >= buffer.inicio.hora && LP->lista[i].fim.min >= buffer.inicio.min)
+            {
+               printf("Erro, ja existe um evento nesse periodo.");
+               return 0;
+            }
+            else
+            {
+                LP->lista[LP->numEventos] = buffer;
+                return 1;
+            }
+        }
     }
+}
+
+int delEvento(ListaEventos *LP){
+    if (!LP->numEventos)
+    {
+        printf("Erro, nenhum Evento disponivel para ser deletado.");
+        return 0;
+    }
+    else
+    {
+        //passarTras(LP->lista);
+        return 1;
+    }
+}
+
+void mostrarTodosEventos(ListaEventos *LP){
+    int i;
+
+    if (LP->numEventos)
+    {
+        for (i = 0; i < LP->numEventos; i++)
+        {
+            printf("%02d/%02d/%04d\n", LP->lista[i].data.dia, LP->lista[i].data.mes, LP->lista[i].data.ano);
+            printf("%02d:%02d - %02d:%02d\n", LP->lista[i].inicio.hora, LP->lista[i].inicio.min, LP->lista[i].fim.hora, LP->lista[i].fim.min);
+            printf("Local do Evento: %s\n", LP->lista[i].local);
+            printf("Descricao do Evento: %s\n", LP->lista[i].descricao);
+            if (!(i+1 == LP->numEventos))
+            {
+                printf("---\n");
+            }
+            
+        }
+    }
+    else
+    {
+        
+        printf("Erro, nenhum Evento cadastrado.");
+    }
+    
+    
 }

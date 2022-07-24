@@ -28,22 +28,24 @@ int main()
         {
 
             case 1:
-                addEvento(LP);
-                LP->numEventos++;
-                LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
-                printf("%d\n", LP->lista[0].data.dia);
-                printf("%d\n", LP->lista[0].data.mes);
-                printf("%d\n", LP->lista[0].data.ano);
+                if (addEvento(LP))
+                {
+                    LP->numEventos++;
+                    qsort(LP->lista, LP->numEventos, sizeof(Evento), compararEventos);
+                    LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+                }
                 break;
 
             case 2:
-                // lista = deletarEvento(lista, numEventos);
-                // numEventos--;
-                // lista = realloc(lista, (numEventos + 1) * sizeof(Evento));
+                if (delEvento(LP))
+                {
+                    LP->numEventos--;
+                    LP->lista = realloc(LP->lista, (LP->numEventos + 1) * sizeof(Evento));
+                }
                 break;
 
             case 3:
-                //mostrarTodosEventos(lista, numEventos);
+                mostrarTodosEventos(LP);
                 break;
 
             case 4:
