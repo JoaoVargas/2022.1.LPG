@@ -48,7 +48,7 @@ int main()
                 break;
 
             case 4:
-                //mostrarDataEventos(lista, i);
+                mostrarDataEventos(LP);
                 break;
 
             case 5:
