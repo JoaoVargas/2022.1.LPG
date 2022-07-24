@@ -19,7 +19,6 @@ int main()
         printf("3 - Mostrar todos os Eventos.\n");
         printf("4 - Mostrar todos os Eventos em uma data.\n");
         printf("5 - Mostrar os proximos cinco Eventos.\n");
-        printf("6 - Mostrar aniversariantes do dia.\n");
         printf("Digite a opcao: ");
         scanf("%d", &menu);
         printf("\n");
